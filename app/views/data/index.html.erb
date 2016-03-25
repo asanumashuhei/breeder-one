@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<h1>ブリーダーワン！！</h1>
+
+<%= form_tag('/scrape', method: :post) do %>
+  <input type="submit" value="スクレイピング"></input>
+  <p style="color: red;">※約1分かかります。</p>
+<% end %>
+
+
+<a href="/regi_minbre">子犬代行登録(みんぶり)へ</a><br>
+<a href="/regi_aitomo">子犬代行登録(あいとも)へ</a>
+<br>
+
+<div class="contents">
+  <p>
+  <% @data.each do |datum| %>
+  【<%= datum.dog_name %>新着子犬】<br>
+  <%= datum.appeal %><br>
+  <%= datum.comment %>→<a href="http://breeder-one.jp<%= datum.url %>" target="_blank">http://breeder-one.jp<%= datum.url %></a><br>
+  今だけ、成約者全員にお祝金10000円プレゼント！<br><br>
+  掲載日：<%= datum.date %><br>
+  <%= datum.breeder_name %>
+  <img src="<%= datum.img_url %>" alt="">
+  <hr>
+  </p>
+<% end %>
+</div>

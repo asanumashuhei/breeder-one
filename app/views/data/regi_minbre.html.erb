@@ -1,0 +1,27 @@
+<%= form_tag('regi_delete', method: :post) do %>
+ <input type="submit" value="データを削除する"></input>
+<% end %>
+
+
+<div class="table_minbre">
+  <table border=1>
+    <tr>
+      <th>id</th>
+      <th>breeder_id</th>
+      <th>dog_type</th>
+      <th>birthday</th>
+      <th>price</th>
+      <th>status</th>
+    </tr>
+    <% @regi_minbre.each do |minbre| %>
+    <tr>
+      <th><%= minbre.dog_id %></th>
+      <th><%= minbre.breeder_id %></th>
+      <th><%= minbre.dog_type %></th>
+      <th><%= minbre.birthday %></th>
+      <th><%= minbre.price %></th>
+      <th><%= minbre.status %></th>
+    </tr>
+    <% end %>
+  </table>
+</div>
