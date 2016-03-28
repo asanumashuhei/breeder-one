@@ -4,10 +4,12 @@ class OtherDog < ActiveRecord::Base
         delay: 1
   }
 
-  BREEDERS = ["NIHON6","ph0528","imaiatuko4241","partridge","00283","13860","shakson","THREEBELL","jemi-moore","momojeshi","32553255","4111","just-circle","eastwan","iso4122","mitsu","temujin","58244165","6666","mimigeinu","morimori0322","nenemomo","yatugi","marvy","cherryoasis","mini777ff","fairydog","100052","chuchudog","aiken-house.","RoseQueen","aikennofukuda","furenndo","raimu19643","20010404","hounds1123","angeltail","milkyhouse","gfdksora","aidog1","momizi","nmftn330","takno268","riyu-subaru","dukeyamanaka","Hime0802","37111495","kenken","shinestar","junelightgarden","po1203","123454321","pome","uta0530","59105910","kurumi0407","bungohills","winding_road_2005","imai","sei038","2303","pretty-apple","wanwan","tokotokotoko","hapinesu","puppyhousecancan","hime-no-ouchi","mickey","1123","precieusejp","3523","candycoco","Max-Garden","kanamori","qkmt","topukapi","madonna","87878989","6235","kids1997","it0220","0389","LOVEARTH","Dion2006","GOI02","silukupapa","kaminoyama","nn7373nn","amiyu","toyohira","fourcoverdog","rose1016","madapapi","OrpheusStar","nra40501","michi131","sunday","booboomonsters","00930"]
+    BREEDERS = Breeder.where(site_name: 'みんなのブリーダー').pluck("breeder_id")
 
   def self.minbre_selling
+
     agent = Mechanize.new
+
     BREEDERS.each do |breeder|
 
       for i in 1...20 do

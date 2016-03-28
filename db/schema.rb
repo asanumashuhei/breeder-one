@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160319045001) do
+ActiveRecord::Schema.define(version: 20160328091659) do
+
+  create_table "breeders", force: :cascade do |t|
+    t.string   "site_name",    limit: 255
+    t.string   "breeder_id",   limit: 255
+    t.string   "breeder_name", limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "data", force: :cascade do |t|
     t.string   "date",         limit: 255
@@ -29,7 +37,7 @@ ActiveRecord::Schema.define(version: 20160319045001) do
     t.string   "site_name",  limit: 255
     t.string   "dog_id",     limit: 255
     t.string   "breeder_id", limit: 255
-    t.string   "dog_type",   limit: 255
+    t.string   "dog_type",   limit: 80,  null: false
     t.string   "birthday",   limit: 255
     t.string   "price",      limit: 255
     t.string   "status",     limit: 255

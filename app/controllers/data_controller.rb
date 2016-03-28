@@ -51,9 +51,8 @@ class DataController < ApplicationController
   end
 
   def delete
-    @dogs = OtherDog.all
-    @dogs.destroy_all
-    redirect_to '/regi_aitomo'
+    OtherDog.delete_all
+    redirect_to(:back)
   end
 
   # GET /data/1
@@ -72,7 +71,7 @@ class DataController < ApplicationController
 
   # POST /data
   # POST /data.json
-  def create
+  def created
     @datum = Datum.new(datum_params)
 
     respond_to do |format|
