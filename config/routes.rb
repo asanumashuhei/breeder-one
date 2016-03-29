@@ -1,10 +1,16 @@
 Rails.application.routes.draw do
   root 'data#index'
   resources :data
+  get 'data_minbre' => 'data#minbre_csv'
+  get 'data_aitomo' => 'data#aitomo_csv'
   post 'scrape' => 'data#scrape_new'
   get 'regi_minbre' => 'data#regi_minbre'
   get 'regi_aitomo' => 'data#regi_aitomo'
   post 'regi_delete' => 'data#delete'
+  get 'admin' => 'data#admin'
+  post 'admin/edit' => 'data#admin_edit'
+  get 'admin/edit/:id' => 'data#admin_edit_breeder'
+  post 'admin/edit/:id/change' => 'data#admin_edit_breeder_change'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
