@@ -72,9 +72,26 @@ div {
   }
 }
 
-.go_to_top {
+.go_to_above {
   position: fixed;
   bottom: 20px;
+  right: 20px;
+  border: 1px #000 solid;
+}
+
+.regi {
+  width: 500px;
+  margin: 0 auto;
+}
+
+.table_breeders {
+  width: 500px;
+  margin: 0 auto;
+}
+
+.go_to_top {
+  position: fixed;
+  bottom: 50px;
   right: 20px;
   border: 1px #000 solid;
 }

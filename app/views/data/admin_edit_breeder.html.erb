@@ -1,0 +1,12 @@
+<h1>編集する</h1>
+
+  <%= form_tag("/admin/edit/#{@breeder.id}/change", method: :post) do %>
+    <input type="text" name="breeder_id" value="<%= @breeder.breeder_id %>">
+    <input type="text" name="breeder_name" value="<%= @breeder.breeder_name %>">
+    <select name="site_name">
+      <option value="みんなのブリーダー">みんぶり</option>
+      <option value="愛犬の友">あいとも</option>
+    <input type="submit" value="編集する"></input>
+
+
+<% end %>

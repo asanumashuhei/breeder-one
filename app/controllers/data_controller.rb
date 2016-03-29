@@ -1,10 +1,20 @@
 class DataController < ApplicationController
   before_action :set_datum, only: [:show, :edit, :update, :destroy]
 
-  # GET /data
-  # GET /data.json
   def index
     @data = Datum.last(9)
+  end
+
+  def minbre_csv
+    bom = "\xFF\xFE".force_encoding("UTF-16LE")
+    @min_dogs = OtherDog.where(site_name: 'みんなのブリーダー').select("dog_id", "breeder_id", "dog_type", "birthday", "price", "status")
+    send_data bom + @min_dogs.to_csv.encode("UTF-16LE"), filename: "minbre.csv", type: 'text/csv', col_sep: "\2c"
+  end
+
+  def aitomo_csv
+    bom = "\xFF\xFE".force_encoding("UTF-16LE")
+    @ai_dogs = OtherDog.where(site_name: '愛犬の友').select("dog_id", "breeder_id", "dog_type", "birthday", "price", "status")
+      send_data bom + @ai_dogs.to_csv.encode("UTF-16LE"), filename: "aitomo.csv", type: 'text/csv'
   end
 
   def scrape(n)
@@ -42,12 +52,37 @@ class DataController < ApplicationController
     redirect_to root_path
   end
 
-  def regi_minbre
-    @regi_minbre = OtherDog.where(site_name: 'みんなのブリーダー').order(status: :desc)
+  # def regi_minbre
+  #   @regi_minbre = OtherDog.where(site_name: 'みんなのブリーダー').order(status: :desc)
+  # end
+
+  # def regi_aitomo
+  #   @regi_aitomo = OtherDog.where(site_name: '愛犬の友')
+  # end
+
+  def admin
+      @breeder = Breeder.new
+      @breeders = Breeder.all.order(id: :desc)
   end
 
-  def regi_aitomo
-    @regi_aitomo = OtherDog.where(site_name: '愛犬の友')
+  def admin_edit
+    @breeder = Breeder.new(breeder_params)
+
+    if @breeder.save
+      redirect_to '/admin', notice: "登録しました"
+    else
+      render :admin
+    end
+  end
+
+  def admin_edit_breeder
+    @breeder = Breeder.find(params[:id])
+  end
+
+  def admin_edit_breeder_change
+    breeder = Breeder.find(params[:id])
+    breeder.update_attributes(breeder_id: params[:breeder_id], breeder_name: params[:breeder_name], site_name: params[:site_name])
+    redirect_to '/admin'
   end
 
   def delete
@@ -118,5 +153,9 @@ class DataController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def datum_params
       params.fetch(:datum, {})
+    end
+
+    def breeder_params
+      params.require(:breeder).permit(:breeder_name, :breeder_id, :site_name)
     end
 end

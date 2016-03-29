@@ -1,0 +1,40 @@
+<div class="regi">
+  <h1>新規代行登録ブリーダーを登録する</h1>
+  <%= form_for @breeder, url: "/admin/edit" do |f| %>
+  ブリーダーID : <%= f.text_field :breeder_id %><br>
+  ブリーダー名 : <%= f.text_field :breeder_name %><br>
+  <%= f.collection_select :site_name, [["みんなのブリーダー", "みんぶり"], ["愛犬の友", "あいとも"]], :first, :last %>
+    <%= f.submit %>
+  <% end %>
+
+ <% if notice.present? %>
+  <%= notice %>
+ <% end %>
+
+ <% if @breeder.errors.present? %>
+  <%= @breeder.errors.full_messages %>
+ <% end %>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+<div class="table_breeders">
+  <table border=1>
+    <tr>
+      <th>サイト名</th>
+      <th>ブリーダーID</th>
+      <th>ブリーダー名</th>
+      <th></th>
+    </tr>
+  <% @breeders.each do |breeder| %>
+    <tr>
+      <th><%= breeder.site_name %></th>
+      <th><%= breeder.breeder_id %></th>
+      <th><%= breeder.breeder_name %></th>
+      <th><a href="/admin/edit/<%= breeder.id %>">編集する</a></th>
+    </tr>
+    <% end %>
+  </table>
+</div>
